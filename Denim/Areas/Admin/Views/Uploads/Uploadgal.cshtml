@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewBag.Title = "Uploadgal";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h2>Uploadgal</h2>
+<script>
+        var loadFile = function (event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var output = document.getElementById('output');
+                if (output.width=1140 && output.height==350) {
+                   alert(" there is no way of matching the event")
+                }
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        };
+    </script>
+
+<h2><strong>Upload Imgaes For Gallary</strong></h2>
+<br />
+
+@*<script type="text/javascript">
+    $(function () {
+        $("#upload").bind("click", function () {
+            //Get reference of FileUpload.
+            var fileUpload = $("#fileUpload")[0];
+            //Check whether HTML5 is supported.
+            if (typeof (fileUpload.files) != "undefined") {
+                //Initiate the FileReader object.
+                var reader = new FileReader();
+                //Read the contents of Image File.
+                reader.readAsDataURL(fileUpload.files[0]);
+                reader.onload = function (e) {
+                    //Initiate the JavaScript Image object.
+                    var image = new Image();
+                    //Set the Base64 string return from FileReader as source.
+                    image.src = e.target.result;
+                    image.onload = function () {
+                        //Determine the Height and Width.
+                        var height = this.height;
+                        var width = this.width;
+                        if (height = 350 || width== 1140) {
+                            alert("Height and Width must be exactly 100px.");
+                            return false;
+                        }
+                        else {
+                            $("#myForm").submit();
+                            return false;
+                        }
+                    };
+                }
+            } 
+        });
+    });
+    var Uploadimage=function()
+    {
+        var file = $("#fileUpload".get(0).files);
+        var data = new formData;
+        data.append("ImageFile", file[0]);
+        data.append("ImagePath", "micromax");
+        $.ajax({
+            type: "Post",
+            url: "/Uploads/UploadGallary",
+        data:data,
+        contentType: false,
+        processData: false,
+        success: function () {
+            $("Uploadimage").append('<img src="~/Gallery/"'+response+'"class="img-responsive thumbnail"/>')
+        }
+
+        })
+
+    }
+</script>*@
+@using (Html.BeginForm("UploadGallary", "Uploads", FormMethod.Post, new { id = "myform", enctype = "multipart/form-data" }))
+
+{<div class="col-lg-3">
+        @*onchange="loadFile(event)"*@
+        <input type="file" name="file" id="file" accept="image/*"  onchange="loadFile(event) " style="font:bold 15px large,verdana" class="btn btn-info"><br />
+            <img id="output" /><br />
+            <input type="submit" id="upload" value="Upload" style="font:bold 15px large,verdana" class="btn btn-danger">
+            @Html.ActionLink("Documents", "DownloadGallary")
+  
+
+    </div>
+
+}
+

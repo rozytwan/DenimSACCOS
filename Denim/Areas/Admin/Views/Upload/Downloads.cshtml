@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Downloads";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@*For View the file List which are Uploaded*@
+@model List<string>
+<h2><strong><u>List Of Available Files</u></strong></h2>
+<table width="400" height="200" style="font:bold 15px large,verdana" >
+ 
+    <tr>
+        <th><u>File Name</u></th>
+      
+        <td ></td>
+        <th><u>Action</u></th>
+       
+    </tr>
+    @for (var i = 0; i <= Model.Count - 1; i++)
+    {
+        <tr>
+            <td>@Model[i].ToString() </td>
+         
+            <td ></td>
+            <td>@Html.ActionLink("Delete", "Delete", new { ImageName = @Model[i].ToString() }, new { onclick = "return confirm('Are you sure you wish to delete this article?');" }) </td>
+        </tr>
+    }
+</table> 
+

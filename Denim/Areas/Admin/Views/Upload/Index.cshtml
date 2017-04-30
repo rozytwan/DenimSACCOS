@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<script>
+    var loadFile = function (event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById('output');
+
+            output.height = 300;
+            output.width = 200;
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+</script>
+
+<h2><strong>Upload Gallary Images Here</strong></h2>
+<br />
+@using (Html.BeginForm("UploadFiles", "Uploads", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{<input type="file" name="file" id="file"  style="font:bold 15px large,verdana"><br />
+    @*<input type="file" id="ImageData" name="ImageData" value="ImageData" accept="image/*" />*@
+    <img id="output" /><br />
+    <input type="submit" value="Upload"  style="font:bold 15px large,verdana">
+    @Html.ActionLink("Documents", "Downloads")
+ 
+}
+
+
+@*<h2>Image Upload here</h2>
+@using (Html.BeginForm("Uploads", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{@*<input type="file" name="file" id="file">
+ <input type="file" id="ImageData" name="ImageData" value="ImageData" accept="image/*" />
+    <input type="submit" value="Upload">
+    @Html.ActionLink("Documents", "Downloads")
+
+}*@

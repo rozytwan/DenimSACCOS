@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "ViewTable";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<h2>Ammortization Table</h2>
+
+<div class="box-body table-responsive " id='datatable'>
+
+    <table id='illustrate' class='table table-striped table-bordered'></table>
+</div>
+
+
+<div class="box-body table-responsive " id='datatable'>
+
+    @Html.Raw(@ViewBag.AmmorTable)
+
+</div>
+

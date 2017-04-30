@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "DownloadImage";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@model List<string>
+<h2><strong><u>List Of Available Images</u></strong></h2>
+<table width="400" height="200" style="font:bold 15px large,verdana">
+    <tr>
+        <th><u>Image Name</u></th>
+
+        <td></td>
+        <th><u>Action</u></th>
+
+    </tr>
+    @for (var i = 0; i <= Model.Count - 1; i++)
+    {
+        <tr>
+            <td>@Model[i].ToString() </td>
+            <td></td>
+            <td>@Html.ActionLink("Delete", "DeleteImg", new { ImageName = @Model[i].ToString() }, new { onclick = "return confirm('Are you sure you wish to delete this article?');" }) </td>
+        </tr>
+    }
+</table> 

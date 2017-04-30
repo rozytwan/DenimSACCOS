@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Denim.Models.Gallery>
+@{
+    ViewBag.Title = "Gallery";
+    Layout = "~/Views/Shared/_FinanceLayout.cshtml";
+}
+<h2>Gallery</h2>
+<div class="container">
+  
+
+    <div class="row gallery">
+       
+        @foreach (var item in Model)
+            {
+
+
+                <div class="col-lg-2 wowload fadeInUp">
+                    <a href="~/@Html.DisplayFor(modelItem => item.ImagePath)" class="gallery-image" data-gallery>
+                        <img src='~/@Html.DisplayFor(modelItem => item.ImagePath)' class="img-responsive">
+                    </a>
+                </div>
+        }
+    </div>
+
+</div>

@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Uploads";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<script>
+    var loadFile = function (event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById('output');
+           
+            output.height = 300;
+            output.width = 200;
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+</script>
+<h2><strong>Upload Imgaes For Slider</strong></h2><br />
+
+@using (Html.BeginForm("UploadImage", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="file" name="file" id="file" accept="image/*" onchange="loadFile(event)"  style="font:bold 15px large,verdana" ><br />  
+  
+   
+    <img id="output"/><br />
+    <input type="submit" value="Upload" style="font:bold 15px large,verdana">
+    @Html.ActionLink("Documents", "DownloadImage")
+
+}
