@@ -1224,6 +1224,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\dncalendar-skin.css" />
     <Content Include="Content\Gridmvc.css" />
+    <Content Include="Content\Images\Denim-saccos 01.png" />
+    <Content Include="Content\Images\logo1.png" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
@@ -1240,6 +1242,8 @@
     <Content Include="Images\denimm.png" />
     <Content Include="Images\Hydrangeas.jpg" />
     <Content Include="Images\Koala.jpg" />
+    <Content Include="Images\Logo - Copy.png" />
+    <Content Include="Images\logo in PNG - Copy - Copy.png" />
     <Content Include="Images\logo in PNG - Copy.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\logo1.png" />
@@ -1549,7 +1553,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>33075</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:33075/</IISUrl>
+          <IISUrl>http://localhost:33675/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

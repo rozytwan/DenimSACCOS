@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.Helpers;
@@ -13,12 +14,13 @@ namespace Denim.Areas.Admin.Controllers
     public class UploadsController : Controller
     {
         // GET: Admin/Uploads
+        //Insert For the files
         public ActionResult Index()
         {
             return View();
         }
 
-        [WebMethod]
+
 
         [HttpPost]
         public ActionResult UploadFiles(HttpPostedFileBase file)
@@ -46,6 +48,7 @@ namespace Denim.Areas.Admin.Controllers
         }
         //
         //Insert for Gallary Images
+
         public ActionResult Uploadgal()
         {
             return View();
@@ -73,6 +76,22 @@ namespace Denim.Areas.Admin.Controllers
             return View(items);
         }
 
+        public bool isFileValid(HttpPostedFileBase file)
+        {
+            Bitmap bitmp = new Bitmap(file.InputStream);
+            if (bitmp.Width == 1140 | bitmp.Height == 350)
+            {
+
+                return true;
+            }
+            else
+            {
+
+                return false;
+            }
+        }
+
+
         //Insert for Slider Images
         public ActionResult UploadSlid()
         {
@@ -80,9 +99,18 @@ namespace Denim.Areas.Admin.Controllers
         }
         public ActionResult UploadSlider(HttpPostedFileBase file)
         {
-            string path = Server.MapPath("~/Images/" + file.FileName);
-            file.SaveAs(path);
-            ViewBag.path = path;
+            if (isFileValid(file))
+            {
+                string path = Server.MapPath("~/Images/" + file.FileName);
+                file.SaveAs(path);
+                ViewBag.path = path;
+            }
+            else
+            {
+                ViewBag.path = "Invalid Dimensions";
+                return View("UploadSlid");
+            }
+
             return View();
         }
         public ActionResult DownloadImages()
@@ -96,20 +124,15 @@ namespace Denim.Areas.Admin.Controllers
             }
             return View(items);
         }
-        public FileResult DownloadGal(string ImageName)
-        {
-            var FileVirtualPath = "~/Gallery/" + ImageName;
-            return File(FileVirtualPath, "application/force-download", Path.GetFileName(FileVirtualPath));
+        //public FileResult DownloadGal(string ImageName)
+        //{
+        //    var FileVirtualPath = "~/Gallery/" + ImageName;
+        //    return File(FileVirtualPath, "application/force-download", Path.GetFileName(FileVirtualPath));
 
-        }
+        //}
 
 
-        public FileResult Download(string ImageName)
-        {
-            var FileVirtualPath = "~/Files/" + ImageName;
-            return File(FileVirtualPath, "application/force-download", Path.GetFileName(FileVirtualPath));
 
-        }
 
 
         //Delete for all files, Images And Slider

@@ -6,7 +6,9 @@ using System.Web.Mvc;
 using Denim.Models;
 using System.IO;
 using System.Web.Services;
+using PagedList.Mvc;
 using PagedList;
+
 
 
 namespace Denim.Controllers
@@ -22,14 +24,17 @@ namespace Denim.Controllers
             int pageSize = 6;
             int pageNumber = (page ?? 1);
             EventGallery objeventGallery = new EventGallery();
-            objeventGallery.eventList = eventList;
+            objeventGallery.eventList = eventList.Where(s => s.Status == true).OrderByDescending(i => i.Date).ToList();
             objeventGallery.files = files;
-            objeventGallery.NewsList = newsList.OrderByDescending(i => i.Date).ToPagedList(pageNumber,pageSize);
+
+            objeventGallery.NewsList = newsList.Where(s => s.status == true).OrderByDescending(i => i.Date).ToPagedList(pageNumber, pageSize);
+
+
             return View("Index", objeventGallery);
         }
         List<Gallery> files;
         List<Event> eventList;
-      List<News> newsList;
+        List<News> newsList;
 
         public ActionResult About()
         {
@@ -109,7 +114,7 @@ namespace Denim.Controllers
 
 
         static string tablehtml = "";
-      [WebMethod]
+        [WebMethod]
         public string SendAmmortization(string table)
         {
             ViewBag.AmmorTable = table;
@@ -152,7 +157,7 @@ namespace Denim.Controllers
 
             return objNewsList;
         }
-      
+
         public List<Gallery> imageslist()
         {
             string folderPath = Server.MapPath("~/Images/");
@@ -187,7 +192,7 @@ namespace Denim.Controllers
             List<Gallery> objimg = files.ToList();
             return objimg;
         }
-        public ActionResult Display(int? Id)
+        public ActionResult Display(int? Id, int page = 1)
         {
             //News objNews = new News();
             //objNews.NewsList = NewsList();
@@ -211,11 +216,26 @@ namespace Denim.Controllers
                 objNews.Title = Db.News.Find(intIdt).Title;
                 objNews.Date = Db.News.Find(intIdt).Date;
                 objNews.Description = Db.News.Find(intIdt).Description;
-                return PartialView("Notice", objNews);
+
+                //    return Request.IsAjaxRequest()
+                //? (ActionResult)PartialView("ProductList", products.ToPagedList(page, pageSize))
+                //: View(products.ToPagedList(page, pageSize));
+
+
+                // return PartialView("Notice", objNews);
+               
+                int pageSize = 6;
+                int pageNumber = page;
+                return Request.IsAjaxRequest()
+                ? (ActionResult)PartialView("Notice", objNews.NewsList.ToPagedList(page, pageSize))
+                : View(objNews.NewsList.ToPagedList(page, pageSize));
+
+
             }
         }
         public ActionResult LinksDisplay(int id)
         {
+
 
             News news = Db.News.Find(id);
             return PartialView("_NewsDescription", news);

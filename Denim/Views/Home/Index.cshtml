@@ -150,24 +150,7 @@
                     </p>
 
                 </div>
-                <div class="col-md-12">
-                    <table width="500" height="200">
-                        <h3> Latest News</h3>
-                        @foreach (var item in @Model.NewsList)
-                        {
-                            <tr>
-                                <td style="font-size:medium">
-                                    @Html.ActionLink(@item.Title, "Display", new { id = item.Id })
-
-                                </td>
-                                <td> <span style="color:red">@item.Date.ToString("dd/MM/yyyy")</span></td>
-
-                                <td>
-                                    <span style="color:red">'@item.Description.ToString().Substring(0, (item.Description.Length > 30) ? 30 : item.Description.Length). . . . . . .</span>
-                                </td>
-                            </tr>
-                        }
-                    </table>
+                <div class="col-md-12">                   
                     @Html.Partial("_NewsDescription",Model.NewsList)
                 </div>
 
