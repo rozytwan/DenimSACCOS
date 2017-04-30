@@ -76,20 +76,7 @@ namespace Denim.Areas.Admin.Controllers
             return View(items);
         }
 
-        public bool isFileValid(HttpPostedFileBase file)
-        {
-            Bitmap bitmp = new Bitmap(file.InputStream);
-            if (bitmp.Width == 1140 | bitmp.Height == 350)
-            {
-
-                return true;
-            }
-            else
-            {
-
-                return false;
-            }
-        }
+  
 
 
         //Insert for Slider Images
@@ -112,6 +99,20 @@ namespace Denim.Areas.Admin.Controllers
             }
 
             return View();
+        }
+        public bool isFileValid(HttpPostedFileBase file)
+        {
+            Bitmap bitmp = new Bitmap(file.InputStream);
+            if (bitmp.Width == 1140 | bitmp.Height == 350)
+            {
+
+                return true;
+            }
+            else
+            {
+
+                return false;
+            }
         }
         public ActionResult DownloadImages()
         {
@@ -171,17 +172,6 @@ namespace Denim.Areas.Admin.Controllers
         }
 
 
-        public JsonResult ImageUpload(Denim.Models.Gallery model)
-        {
-            var file = model.ImageFile;
-            if (file != null)
-            {
-                var fileName = Path.GetFileName(file.FileName);
-                var extension = Path.GetExtension(file.FileName);
-                var filenamewithoutextension = Path.GetFileNameWithoutExtension(file.FileName);
-                file.SaveAs(Server.MapPath("~/Gallery/" + file.FileName));
-            }
-            return Json(file.FileName, JsonRequestBehavior.AllowGet);
-        }
+
     }
 }

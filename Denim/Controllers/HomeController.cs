@@ -222,13 +222,9 @@ namespace Denim.Controllers
                 //: View(products.ToPagedList(page, pageSize));
 
 
-                // return PartialView("Notice", objNews);
+                 return PartialView("Notice", objNews);
                
-                int pageSize = 6;
-                int pageNumber = page;
-                return Request.IsAjaxRequest()
-                ? (ActionResult)PartialView("Notice", objNews.NewsList.ToPagedList(page, pageSize))
-                : View(objNews.NewsList.ToPagedList(page, pageSize));
+             
 
 
             }
